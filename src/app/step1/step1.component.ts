@@ -23,8 +23,8 @@ export class Step1Component implements OnInit {
 
   async submit() {
     if(this.currentInput) {
-      this.loading = true;
-      this.rest.doOCR(this.currentInput).then(resp => console.log(resp));
+      // this.loading = true;
+      this.rest.doOCR(this.currentInput).then((resp: any) => console.log(resp["ParsedResults"][0]["TextOverlay"]["Lines"]));
     }
   }
 }

@@ -13,13 +13,11 @@ export class RestService {
   public async doOCR(img: File) {
     const formData = new FormData();
     formData.append('file', img, img.name);
-
-    let params = new HttpParams();
-    params = params.append("OCREngine", 2)
-    params = params.append("isTable", true)
+    formData.append("isOverlayRequired", true.toString());
+    formData.append("isTable", true.toString());
+    formData.append("OCREngine", "2");
 
     const resp = await this.http.post(this.url, formData, {
-      params: params,
       headers: { 'apikey': "c268f6d4d188957" },
       observe: 'response'
     }).toPromise();

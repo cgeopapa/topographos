@@ -1,0 +1,18 @@
+<h2>Step 1</h2>
+<p>Upload a table image of your x and y points</p>
+<!-- <form [formGroup]="myForm" (ngSubmit)="submit"> -->
+    <input 
+        type="file" 
+        name="file" 
+        class="form-control form-control-lg" 
+        id="upload" accept="image/*" 
+        required 
+        [(ngModel)]="currentInput" 
+        (change)="onFileSelected($event)">
+    <input 
+        type="button" 
+        class="btn btn-primary my-2" 
+        value="Next"
+        [disabled]="loading"
+        (click)="submit()">
+<!-- </form> -->

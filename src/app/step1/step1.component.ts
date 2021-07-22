@@ -23,8 +23,25 @@ export class Step1Component implements OnInit {
 
   async submit() {
     if(this.currentInput) {
-      // this.loading = true;
-      this.rest.doOCR(this.currentInput).then((resp: any) => console.log(resp["ParsedResults"][0]["TextOverlay"]["Lines"]));
+      this.loading = true;
+      
+      let parsedCSV: string[][] = [];
+      // this.rest.doOCR(this.currentInput).then(
+      //   (resp: any) => {
+      //     for(let line of resp["ParsedResults"][0]["TextOverlay"]["Lines"]) {
+      //       let wordsOfLine: string[] = [];
+      //       for(let word of line["Words"]) {
+      //         wordsOfLine.push(word["WordText"]);
+      //       }
+      //       parsedCSV.push(wordsOfLine);
+      //     }
+      //     console.log(parsedCSV);
+      //   });
+      localStorage.setItem("parsedResults", JSON.stringify(this.rest.ocrtest()))
+      let gg = localStorage.getItem("parsedResults");
+      if(gg){
+        console.log(JSON.parse(gg));
+      }
     }
   }
 }

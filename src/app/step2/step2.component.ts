@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as Handsontable from 'handsontable';
 
 @Component({
   selector: 'app-step2',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Step2Component implements OnInit {
 
+  dataset: any;
+
   constructor() { }
 
   ngOnInit(): void {
+    let data = localStorage.getItem("parsedResults");
+    if (data) {
+      this.dataset = JSON.parse(data);
+    }
   }
 
 }

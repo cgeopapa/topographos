@@ -9,6 +9,7 @@ import { Step3Component } from './step3/step3.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule, HttpClientXsrfModule} from "@angular/common/http";
+import { HotTableModule } from '@handsontable/angular';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {HttpClientModule, HttpClientXsrfModule} from "@angular/common/http";
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    HotTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

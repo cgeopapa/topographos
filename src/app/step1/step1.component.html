@@ -1,18 +1,24 @@
 <h2>Step 1</h2>
 <p>Upload a table image of your x and y points</p>
-<!-- <form [formGroup]="myForm" (ngSubmit)="submit"> -->
-    <input 
-        type="file" 
-        name="file" 
-        class="form-control form-control-lg" 
-        id="upload" accept="image/*" 
-        required 
-        [(ngModel)]="currentInput" 
-        (change)="onFileSelected($event)">
-    <input 
-        type="button" 
-        class="btn btn-primary my-2" 
-        value="Next"
-        [disabled]="loading"
-        (click)="submit()">
-<!-- </form> -->
+<input 
+    type="file" 
+    name="file" 
+    class="form-control form-control-lg my-2" 
+    id="upload" accept="image/*" 
+    required 
+    (change)="onFileSelected($event)">
+<input type="range" name="range" id="range" min="-180" max="180" value="0"
+    (change)="onRotationChange($event)" [hidden]="croppedImage===null"
+    style="width: 100%;">
+    <image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    (imageCropped)="imageCropped($event)"
+    [maintainAspectRatio]="false"
+    [transform]="imgTransform"
+></image-cropper>
+<input 
+    type="button" 
+    class="btn btn-primary my-2" 
+    value="Next"
+    [disabled]="loading"
+    (click)="submit()">

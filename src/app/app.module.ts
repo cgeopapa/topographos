@@ -8,8 +8,9 @@ import { Step2Component } from './step2/step2.component';
 import { Step3Component } from './step3/step3.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule, HttpClientXsrfModule} from "@angular/common/http";
+import {HttpClientModule} from "@angular/common/http";
 import { HotTableModule } from '@handsontable/angular';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { HotTableModule } from '@handsontable/angular';
     ReactiveFormsModule,
     HttpClientModule,
     HotTableModule,
+    ImageCropperModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

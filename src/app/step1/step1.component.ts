@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
+import { ParserService } from '../parser.service';
 import { RestService } from '../rest.service';
 
 @Component({
@@ -9,39 +10,44 @@ import { RestService } from '../rest.service';
 })
 export class Step1Component implements OnInit {
 
-  currentInput: any;
   loading = false;
+  croppedImage: any = null;
+  imageChangedEvent: any = '';
 
-  constructor(private rest: RestService) { }
+  rotation: number = 0;
+  imgTransform: ImageTransform = {};
+
+  constructor(
+    private rest: RestService,
+    private parser: ParserService
+    ) { }
 
   ngOnInit(): void {
   }
 
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.base64;
+  }
+
+  onRotationChange(event: any) {
+    this.imgTransform = {rotate: event.currentTarget.value};
+  }
+
   onFileSelected(event: any) {
-    this.currentInput = event.target.files[0];
+    // this.currentInput = event.target.files[0];
+    this.imageChangedEvent = event;
   }
 
   async submit() {
-    if(this.currentInput) {
+    if(this.croppedImage) {
       this.loading = true;
       
       let parsedCSV: string[][] = [];
-      // this.rest.doOCR(this.currentInput).then(
-      //   (resp: any) => {
-      //     for(let line of resp["ParsedResults"][0]["TextOverlay"]["Lines"]) {
-      //       let wordsOfLine: string[] = [];
-      //       for(let word of line["Words"]) {
-      //         wordsOfLine.push(word["WordText"]);
-      //       }
-      //       parsedCSV.push(wordsOfLine);
-      //     }
-      //     console.log(parsedCSV);
-      //   });
-      localStorage.setItem("parsedResults", JSON.stringify(this.rest.ocrtest()))
-      let gg = localStorage.getItem("parsedResults");
-      if(gg){
-        console.log(JSON.parse(gg));
-      }
+      this.rest.doOCR(this.croppedImage).then(
+        (resp: any) => {
+          parsedCSV = this.parser.parse(resp);
+        });
+      sessionStorage.setItem("parsedResults", JSON.stringify(this.rest.ocrtest()))
     }
   }
 }

@@ -1,10 +1,18 @@
 <h2>Step 2</h2>
 <p>Check the ocr results and make any necessary adjustments</p>
 <div class="autoscroll empty">
-    <hot-table
-        [data]="dataset"
-        [colHeaders]="false"
-        [rowHeaders]="false"
-        licenseKey="non-commercial-and-evaluation"
-    ></hot-table>
+    <div class="d-flex flex-row justify-content-around my-4">
+        <hot-table
+            [data]="dataset"
+            [colHeaders]="false"
+            [rowHeaders]="false"
+            licenseKey="non-commercial-and-evaluation"
+            [hotId]="id"
+        ></hot-table>
+        <img [src]="croppedImg" alt="cropped image preview">
+    </div>
+    <div class="d-flex flex-row justify-content-between my-4">
+        <input class="btn btn-outline-primary" type="button" value="Previous" (click)="back()">
+        <input class="btn btn-primary" type="button" value="Next" (click)="next()">
+    </div>
 </div>

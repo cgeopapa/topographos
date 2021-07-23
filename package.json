@@ -22,6 +22,7 @@
     "@handsontable/angular": "^9.0.1",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "bootstrap": "^4.5.0",
+    "file-saver": "^2.0.5",
     "handsontable": "^9.0.1",
     "ngx-image-cropper": "^4.0.1",
     "round-slider": "^1.6.1",

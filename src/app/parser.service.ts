@@ -31,6 +31,7 @@ export class ParserService {
         word = word.replace(/Z/g, '2');
         word = word.replace(/O|o|Q|D/g, '0');
         word = word.replace(/I|l/g, '1');
+        word = word.replace(/,/g, '.');
         return word
       })
       

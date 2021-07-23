@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
 import { ParserService } from '../parser.service';
 import { RestService } from '../rest.service';
@@ -19,7 +20,8 @@ export class Step1Component implements OnInit {
 
   constructor(
     private rest: RestService,
-    private parser: ParserService
+    private parser: ParserService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -43,11 +45,13 @@ export class Step1Component implements OnInit {
       this.loading = true;
       
       let parsedCSV: string[][] = [];
+      sessionStorage.setItem("croppedImage", this.croppedImage);
       this.rest.doOCR(this.croppedImage).then(
         (resp: any) => {
           parsedCSV = this.parser.parse(resp);
+          sessionStorage.setItem("parsedResults", JSON.stringify(parsedCSV));
+          this.router.navigate(['/step2']);
         });
-      sessionStorage.setItem("parsedResults", JSON.stringify(this.rest.ocrtest()))
     }
   }
 }

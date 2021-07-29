@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { isPartiallyEmittedExpression } from 'typescript';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +29,10 @@ export class DatabaseService {
       console.log(img);
     })
     return img;
+  }
+
+  async exists(pin: string) {
+    const val = await this.db.database.ref("images/"+pin).once("value")
+    return val.val() !== null;
   }
 }

@@ -1,1 +1,12 @@
-<p>mobile works!</p>
+<h4>Insert your PIN to get started</h4>
+<div class="d-flex flex-column align-items-center">
+    <input 
+    type="text" name="pin" id="pin" 
+    class="my-4 text-center text-monospace form-control-lg"
+    [maxLength]=4
+    [(ngModel)]="pin"
+    (change)="checkPIN()">
+    <input type="button" value="Start" class="btn btn-primary mb-4" width="50%">
+</div>
+<h4>Instructions</h4>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero animi cum quaerat recusandae! Animi odit cumque eligendi quos expedita neque laboriosam, omnis distinctio reprehenderit, aliquam molestiae sequi. Rerum, esse eveniet.</p>

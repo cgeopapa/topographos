@@ -19,9 +19,7 @@ export class DesktopComponent implements OnInit {
 
   public begin(): void {
     this.dbController.createPIN().then(() => {
-      console.log(this.dbController.get(1111));
-      
+      this.router.navigate(["step1"]) 
     });
-    // this.router.navigate(["step1"])
   }
 }

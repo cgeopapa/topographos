@@ -9,6 +9,12 @@ import { DatabaseService } from '../databse.service';
 export class MobileComponent implements OnInit {
 
   pin: string = "";
+  send = false;
+  img: any = null;
+
+  private pinFlag = false;
+  private imgFlag = false;
+
 
   constructor(
     private db: DatabaseService
@@ -18,7 +24,21 @@ export class MobileComponent implements OnInit {
   }
 
   async checkPIN() {
-    console.log(await this.db.exists(this.pin));
+    const re = /\d{4}/;
+    if(re.test(this.pin)){
+      this.pinFlag = await this.db.exists(this.pin);
+      this.send = this.pinFlag && this.imgFlag;
+    }
   }
 
+  fileSelected(event: any) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.img = reader.result;
+      this.imgFlag = this.img !== null;
+      this.send = this.pinFlag && this.imgFlag;
+    }
+  }
 }

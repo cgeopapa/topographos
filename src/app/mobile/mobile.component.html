@@ -6,7 +6,13 @@
     [maxLength]=4
     [(ngModel)]="pin"
     (change)="checkPIN()">
-    <input type="button" value="Start" class="btn btn-primary mb-4" width="50%">
+    <input type="file" name="photo" id="photo"
+        accept="image/*"
+        capture="environment"
+        (change)="fileSelected($event)">
+    <input type="button" value="Start" class="btn btn-primary mb-4" width="50%"
+        [disabled]="!send">
+    <img [src]="img" width="90%"/>
 </div>
 <h4>Instructions</h4>
 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero animi cum quaerat recusandae! Animi odit cumque eligendi quos expedita neque laboriosam, omnis distinctio reprehenderit, aliquam molestiae sequi. Rerum, esse eveniet.</p>

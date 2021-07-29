@@ -27,6 +27,10 @@ export class Step1Component implements OnInit {
   ngOnInit(): void {
   }
 
+  exit(): void {
+    this.router.navigate([""]);
+  }
+
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
   }

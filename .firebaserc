@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "topographos-app"
+  },
+  "targets": {
+    "topographos-app": {
+      "hosting": {
+        "topographos": [
+          "topographos-app"
+        ]
+      }
+    }
+  }
+}

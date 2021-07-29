@@ -11,13 +11,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http";
 import { HotTableModule } from '@handsontable/angular';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { MobileComponent } from './mobile/mobile.component';
+import { DesktopComponent } from './desktop/desktop.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from "@angular/fire/database";
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
     AppComponent,
     Step1Component,
     Step2Component,
-    Step3Component
+    Step3Component,
+    MobileComponent,
+    DesktopComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +35,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     HttpClientModule,
     HotTableModule,
     ImageCropperModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

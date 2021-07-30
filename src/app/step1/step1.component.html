@@ -13,13 +13,14 @@
 </span>
 
 <input type="range" name="range" id="range" min="-180" max="180" value="0"
-    (change)="onRotationChange($event)" [hidden]="croppedImage===null"
+    (change)="onRotationChange($event)" [hidden]="croppedImage===''"
     style="width: 100%;">
 <image-cropper
     [imageChangedEvent]="imageChangedEvent"
     (imageCropped)="imageCropped($event)"
     [maintainAspectRatio]="false"
     [transform]="imgTransform"
+    [imageBase64]="croppedImage"
 ></image-cropper>
 
 <div class="d-flex flex-row justify-content-between">

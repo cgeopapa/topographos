@@ -1,6 +1,5 @@
-import { ChangeDetectorRef, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,17 +21,21 @@ export class DatabaseService {
     return this.imgRef.update("1111", {img: ""});
   }
 
-  get(pin: number) {
+  get(pin: string) {
     let img: any;
-    this.db.object(this.dbPath+"/1111").valueChanges().subscribe((val: any) => {
-      img = val["img"];
-      console.log(img);
-    })
-    return img;
+    return this.db.object(this.dbPath+"/"+pin).valueChanges();
   }
 
   async exists(pin: string) {
     const val = await this.db.database.ref("images/"+pin).once("value")
     return val.val() !== null;
+  }
+
+  uploadImg(pin: string, img: string) {
+    return this.imgRef.update(pin, {img: img});
+  }
+
+  viewImg() {
+    return this.db.database.ref("images/1111").once("value");
   }
 }

@@ -41,4 +41,8 @@ export class MobileComponent implements OnInit {
       this.send = this.pinFlag && this.imgFlag;
     }
   }
+
+  start() {
+    this.db.uploadImg(this.pin, this.img);
+  }
 }

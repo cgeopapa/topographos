@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
+import { DatabaseService } from '../databse.service';
 import { ParserService } from '../parser.service';
 import { RestService } from '../rest.service';
 
@@ -21,10 +22,15 @@ export class Step1Component implements OnInit {
   constructor(
     private rest: RestService,
     private parser: ParserService,
-    private router: Router
+    private router: Router,
+    private db: DatabaseService
     ) { }
 
   ngOnInit(): void {
+    this.db.get("1111").subscribe((val: any) => {
+      this.croppedImage = val["img"];
+      console.log(this.croppedImage);
+    });
   }
 
   exit(): void {

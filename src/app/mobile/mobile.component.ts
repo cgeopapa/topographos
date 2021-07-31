@@ -9,12 +9,13 @@ import { DatabaseService } from '../databse.service';
 export class MobileComponent implements OnInit {
 
   pin: string = "";
-  send = false;
   img: any = null;
+  ready = false;
+  send = false;
+  buttonText = "Upload"
 
   private pinFlag = false;
   private imgFlag = false;
-
 
   constructor(
     private db: DatabaseService
@@ -27,7 +28,7 @@ export class MobileComponent implements OnInit {
     const re = /\d{4}/;
     if(re.test(this.pin)){
       this.pinFlag = await this.db.exists(this.pin);
-      this.send = this.pinFlag && this.imgFlag;
+      this.ready = this.pinFlag && this.imgFlag;
     }
   }
 
@@ -38,11 +39,19 @@ export class MobileComponent implements OnInit {
     reader.onload = () => {
       this.img = reader.result;
       this.imgFlag = this.img !== null;
-      this.send = this.pinFlag && this.imgFlag;
+      this.ready = this.pinFlag && this.imgFlag;
     }
   }
 
   start() {
-    this.db.uploadImg(this.pin, this.img);
+    this.send = true;
+    this.buttonText = "Uploading..."
+    this.ready = false;
+    this.db.uploadImg(this.pin, this.img).then(() => {
+      this.send = false;
+      this.buttonText = "Upload";
+      this.ready = this.pinFlag && this.imgFlag;
+      alert("Upload was completed successfully. You should be able to see your photo in the browser app now.");
+    });
   }
 }

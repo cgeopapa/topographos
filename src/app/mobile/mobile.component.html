@@ -5,18 +5,24 @@
     class="my-4 text-center text-monospace form-control-lg"
     [maxLength]=4
     [(ngModel)]="pin"
+    [disabled]="send"
     (change)="checkPIN()">
     <input type="file" name="photo" id="photo"
         accept="image/*"
         capture="environment"
+        [disabled]="send"
         (change)="fileSelected($event)">
-    <input 
+    <button 
         type="button" 
-        value="Start" 
-        class="btn btn-primary mb-4" 
+        class="btn btn-primary my-4" 
         width="50%"
-        [disabled]="!send"
+        [disabled]="!ready"
         (click)="start()">
+        <span class="spinner-border spinner-border-sm" 
+            role="status" aria-hidden="true"
+            [hidden]="!send"></span>
+        {{buttonText}}
+    </button>
     <img [src]="img" width="90%"/>
 </div>
 <h4>Instructions</h4>

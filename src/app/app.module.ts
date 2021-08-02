@@ -16,6 +16,7 @@ import { DesktopComponent } from './desktop/desktop.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { environment } from 'src/environments/environment';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { environment } from 'src/environments/environment';
     Step2Component,
     Step3Component,
     MobileComponent,
-    DesktopComponent
+    DesktopComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

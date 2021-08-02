@@ -26,6 +26,10 @@ export class DatabaseService {
     return this.db.object(this.dbPath+"/"+pin).valueChanges();
   }
 
+  delete(pin: string) {
+    this.db.database.ref("images/"+pin+"/img").set("");
+  }
+
   async exists(pin: string) {
     const val = await this.db.database.ref("images/"+pin).once("value")
     return val.val() !== null;

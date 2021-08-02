@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DOC_ORIENTATION, NgxImageCompressService } from 'ngx-image-compress';
-import { ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
+import { ImageCroppedEvent, ImageCropperComponent, ImageTransform } from 'ngx-image-cropper';
 import { CompressService } from '../compress.service';
 import { DatabaseService } from '../databse.service';
 import { ParserService } from '../parser.service';
@@ -16,7 +16,11 @@ export class Step1Component implements OnInit {
 
   loading = false;
   croppedImage: any = null;
+  uploadedImage: string = "";
   imageChangedEvent: any = '';
+
+  @ViewChild("cropper")
+  cropper: any;
 
   rotation: number = 0;
   imgTransform: ImageTransform = {};
@@ -26,13 +30,14 @@ export class Step1Component implements OnInit {
     private parser: ParserService,
     private router: Router,
     private db: DatabaseService,
-    private imageCompress: NgxImageCompressService,
     private compressService: CompressService
     ) { }
 
   ngOnInit(): void {
     this.db.get("1111").subscribe((val: any) => {
-      this.croppedImage = val["img"];
+      this.cropper.imageBase64 = this.uploadedImage;
+      this.uploadedImage = val["img"];
+      this.db.delete("1111");
     });
   }
 

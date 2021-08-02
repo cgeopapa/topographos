@@ -1,12 +1,5 @@
-<h4>Insert your PIN to get started</h4>
+<h4>Take a photo to send it to your pc</h4>
 <div class="d-flex flex-column align-items-center">
-    <input 
-    type="text" name="pin" id="pin" 
-    class="my-4 text-center text-monospace form-control-lg"
-    [maxLength]=4
-    [(ngModel)]="pin"
-    [disabled]="send"
-    (change)="checkPIN()">
     <input type="file" name="photo" id="photo"
         accept="image/*"
         capture="environment"

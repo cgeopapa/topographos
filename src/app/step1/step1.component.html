@@ -7,10 +7,13 @@
     id="upload" accept="image/*" 
     required 
     (change)="onFileSelected($event)">
-<p>Or use your mobile device to take a photo using this PIN:</p>
-<span class="card">
-    <h4 class="card-body text-center">1111</h4>
-</span>
+    <div class="d-flex flex-row justify-content-between">
+        <p>Or use your mobile device by scanning this QR code</p>
+        <span class="card">
+            <qr-code [value]="'http://192.168.1.21:4200/mobile?pin=1111'"></qr-code>
+            <!-- <h4 class="card-body text-center">1111</h4> -->
+        </span>
+    </div>
 
 <input type="range" name="range" id="range" min="-180" max="180" value="0"
     (change)="onRotationChange($event)" [hidden]="croppedImage===null"

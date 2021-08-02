@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { DOC_ORIENTATION, NgxImageCompressService } from 'ngx-image-compress';
 import { ImageCroppedEvent, ImageCropperComponent, ImageTransform } from 'ngx-image-cropper';
 import { CompressService } from '../compress.service';
 import { DatabaseService } from '../databse.service';

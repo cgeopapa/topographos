@@ -18,6 +18,7 @@ import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { environment } from 'src/environments/environment';
 import { FooterComponent } from './footer/footer.component';
 import { NgxImageCompressService } from 'ngx-image-compress';
+import { QRCodeComponent, QRCodeModule } from 'angular2-qrcode';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { NgxImageCompressService } from 'ngx-image-compress';
     ImageCropperModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
+    QRCodeModule,
   ],
   providers: [
     NgxImageCompressService,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DatabaseService } from '../databse.service';
 
 @Component({
@@ -18,18 +19,22 @@ export class MobileComponent implements OnInit {
   private imgFlag = false;
 
   constructor(
-    private db: DatabaseService
+    private db: DatabaseService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
+    this.route.queryParams.forEach(params => {
+      if(params.pin) {
+        this.pin = params.pin;
+        this.checkPIN();
+      }
+    })
   }
 
   async checkPIN() {
     const re = /\d{4}/;
-    if(re.test(this.pin)){
-      this.pinFlag = await this.db.exists(this.pin);
-      this.ready = this.pinFlag && this.imgFlag;
-    }
+    this.pinFlag = re.test(this.pin) && await this.db.exists(this.pin);
   }
 
   fileSelected(event: any) {

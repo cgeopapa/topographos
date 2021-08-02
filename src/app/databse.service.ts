@@ -18,6 +18,9 @@ export class DatabaseService {
 
   createPIN() {
     //TODO PIN generation
+    let testPin = Math.floor(Math.random() * 10000).toString();
+    testPin = ('0000' + testPin).slice(-4);
+
     return this.imgRef.update("1111", {img: ""});
   }
 

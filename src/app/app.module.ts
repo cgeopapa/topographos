@@ -17,6 +17,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { environment } from 'src/environments/environment';
 import { FooterComponent } from './footer/footer.component';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { FooterComponent } from './footer/footer.component';
     Step3Component,
     MobileComponent,
     DesktopComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +41,9 @@ import { FooterComponent } from './footer/footer.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
   ],
-  providers: [],
+  providers: [
+    NgxImageCompressService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

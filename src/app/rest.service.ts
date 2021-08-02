@@ -10,7 +10,7 @@ export class RestService {
 
   constructor(private http: HttpClient) { }
 
-  public async doOCR(img: File) {
+  public async doOCR(img: string) {
     const formData = new FormData();
     formData.append('base64Image', img);
     formData.append("isOverlayRequired", true.toString());

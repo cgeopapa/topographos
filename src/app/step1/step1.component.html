@@ -15,7 +15,7 @@
         </span>
     </div>
 
-<input type="range" name="range" id="range" min="-180" max="180" value="0"
+<input type="range" name="range" id="range" min="-30" max="30" value="0"
     (change)="onRotationChange($event)" [hidden]="croppedImage===null"
     style="width: 100%;">
 <image-cropper
@@ -25,6 +25,7 @@
     [transform]="imgTransform"
     [imageBase64]="uploadedImage"
     #cropper
+    style="max-height: 80vh;"
 ></image-cropper>
 
 <div class="d-flex flex-row justify-content-between">

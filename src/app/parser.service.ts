@@ -11,12 +11,11 @@ export class ParserService {
   public parse(resp: any) : string[][] 
   {
     let parsedCSV: string[][] = [];
-    for(let line of resp["ParsedResults"][0]["TextOverlay"]["Lines"]) {
-      let wordsOfLine: string[] = [];
-      for(let word of line["Words"]) {
-        wordsOfLine.push(word["WordText"]);
-      }
-      parsedCSV.push(wordsOfLine);
+
+    const parsedText: string = resp["ParsedResults"][0]["ParsedText"];
+    const lines = parsedText.split("\t\r\n");
+    for(let line of lines){      
+      parsedCSV.push(line.split("\t"));
     }
     parsedCSV = this.clean(parsedCSV);
     return parsedCSV;

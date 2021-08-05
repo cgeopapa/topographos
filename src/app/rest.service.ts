@@ -15,7 +15,9 @@ export class RestService {
     formData.append('base64Image', img);
     formData.append("isOverlayRequired", true.toString());
     formData.append("isTable", true.toString());
-    formData.append("OCREngine", "2");
+    formData.append("detectOrientation", true.toString());
+    formData.append("scale", true.toString());
+    formData.append("OCREngine", "1");
 
     const resp = await this.http.post(this.url, formData, {
       headers: { 'apikey': "c268f6d4d188957" },

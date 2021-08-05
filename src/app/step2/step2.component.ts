@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { HotTableRegisterer } from '@handsontable/angular';
 import * as Handsontable from 'handsontable';
@@ -14,6 +14,49 @@ export class Step2Component implements OnInit {
   croppedImg: string|null = '';
   id: string = "hot-table";
 
+  colHeaders: string[] = [];
+  contextMenu = {
+    items: {
+      col_left: {},
+      col_right: {},
+      sep1: Handsontable.default.plugins.ContextMenu.SEPARATOR,
+      clear_column: {},
+      sep2: Handsontable.default.plugins.ContextMenu.SEPARATOR,
+      rename_col: {
+        name: "Rename Column",
+        submenu: {
+          items: [
+            {
+              key: "rename_col:id",
+              name: "ID",
+              callback: (key: any, selection: any, clickEvent: any) => {
+                this.colHeaders[selection[0]["start"]["col"]] = "ID";
+                this.hot.hotInstance.render();
+              },
+            },
+            {
+              key: "rename_col:x",
+              name: "X",
+              callback: (key: any, selection: any, clickEvent: any) => {
+                this.colHeaders[selection[0]["start"]["col"]] = "X";
+                this.hot.hotInstance.render();
+              },
+            },
+            {
+              key: "rename_col:y",
+              name: "Y",
+              callback: (key: any, selection: any, clickEvent: any) => {
+                this.colHeaders[selection[0]["start"]["col"]] = "Y";
+                this.hot.hotInstance.render();
+              },
+            }
+          ]
+        }
+      }
+    }
+  };
+
+  @ViewChild('hot') hot: any;
   private hotRegisterer = new HotTableRegisterer();
 
   constructor(
@@ -26,6 +69,14 @@ export class Step2Component implements OnInit {
     if (data) {
       this.dataset = JSON.parse(data);
     }
+    let length: number = -1;
+    for(let line of this.dataset) {
+      length = Math.max(length, line.length);
+    }
+    const headers = ["ID", "X", "Y"]
+    for(let i = 0; i < length; i++){
+      this.colHeaders.push(headers[i%3]);
+    }
   }
 
   public back(): void {
@@ -33,7 +84,7 @@ export class Step2Component implements OnInit {
   }
 
   public next(): void {
-    let data = this.hotRegisterer.getInstance(this.id).getData();
+    let data = this.hot.hotInstance.getData();
     data = data.filter((line: string[]) => {
       line = line.filter((word: string) => {
         return word !== null

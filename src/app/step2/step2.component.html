@@ -4,10 +4,12 @@
     <div class="d-flex flex-row justify-content-around my-4">
         <hot-table
             [data]="dataset"
-            [colHeaders]="false"
+            [colHeaders]="colHeaders"
             [rowHeaders]="false"
+            [dropdownMenu]="contextMenu"
             licenseKey="non-commercial-and-evaluation"
             [hotId]="id"
+            #hot
         ></hot-table>
         <img [src]="croppedImg" alt="cropped image preview">
     </div>

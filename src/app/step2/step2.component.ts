@@ -20,7 +20,16 @@ export class Step2Component implements OnInit {
       col_left: {},
       col_right: {},
       sep1: Handsontable.default.plugins.ContextMenu.SEPARATOR,
-      clear_column: {},
+      clear_column: {
+        name: "Remove Column",
+        callback: (key: any, selection: any, clickEvent: any) => {
+          for (let i = 0; i < selection[0]["end"]["row"]; i++) {
+            this.dataset[i][selection[0]["end"]["col"]] = null;
+          }
+          this.colHeaders[selection[0]["start"]["col"]] = "";
+          this.hot.hotInstance.render();
+        },
+      },
       sep2: Handsontable.default.plugins.ContextMenu.SEPARATOR,
       rename_col: {
         name: "Rename Column",
